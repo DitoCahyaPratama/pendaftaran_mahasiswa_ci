@@ -16,7 +16,7 @@
                 if ($this->session->userdata('user_logged') != null) {
                 ?>
                     <li class="nav-item cta mr-md-2"><a href="<?php echo site_url('peserta/isi_formulir') ?>" class="nav-link">Isi Formulir Pendaftaran</a></li>
-                    <li class="nav-item cta mr-md-2"><a href="#" onclick="system_logout()" class="nav-link">ini Logout</a></li>
+                    <li class="nav-item cta mr-md-2"><a href="#" onclick="system_logout()" class="nav-link">Logout</a></li>
                 <?php
                 } else {
                 ?>

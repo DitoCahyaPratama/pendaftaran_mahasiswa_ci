@@ -19,13 +19,13 @@
                                 <input type="text" class="form-control" id="uname" required="">
                             </div>
                             <div class="form-group">
-                                <label for="upass">Password</label>
-                                <input type="password" class="form-control" id="upass" required="">
-                            </div>
-                            <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" required="" pattern=".+@gmail\.com" title="Harus menggunakan email dari gmail.com">
-                                <label style="">Pastikan masukkan email dengan benar untuk proses aktifasi akun</label>
+                                <label>Pastikan masukkan email dengan benar untuk proses aktifasi akun</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="upass">Password</label>
+                                <input type="password" class="form-control" id="upass" required="">
                             </div>
                             <div class="form-group">
                                 <label for="uname">No.Telp / WA</label>
@@ -35,14 +35,9 @@
                                 <label for="uname">Program Studi</label>
                                 <select class="form-control" id="prodi" required="">
                                     <option value="">Pilih Program Study...</option>
-                                    <?php
-                                    // $query = _run("SELECT * FROM studies");
-                                    // while ($dataone = _get($query)) {
-                                    ?>
-                                        <option value="<?php echo $dataone['id'] ?>"><?php echo $dataone['name'] ?></option>
-                                    <?php
-                                    
-                                    ?>
+                                    <?php foreach($prodi as $row): ?>
+                                        <option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>    
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div id="sukses">
@@ -71,7 +66,6 @@
             var uname = $('#uname').val();
             var upass = $('#upass').val();
             var email = $('#email').val();
-            var name = $('#name').val();
             var telp = $('#telp').val();
             var prodi = $('#prodi').val();
             $.ajax({
@@ -80,15 +74,13 @@
                     uname: uname,
                     upass: upass,
                     email: email,
-                    name: name,
                     telp: telp,
                     prodi: prodi
                 },
                 type: 'POST',
                 dataType: 'JSON',
                 success: function(res) {
-                    console.log(res.split('-')[0]);
-                    if (res.split('-')[0] == 'sukses') {
+                    if (res) {
                         $('#sukses').show();
                         $('#gagal').hide();
                         Swal.fire({
@@ -112,6 +104,7 @@
                 },
                 error: function(err) {
                     alert(err);
+                    console.log(err);
                 }
             })
         }

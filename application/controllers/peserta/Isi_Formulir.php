@@ -7,7 +7,7 @@
         public function __construct()
         {
             parent::__construct();
-            $this->load->model("public/user_model");
+            $this->load->model("user_model");
             if($this->user_model->isNotLogin()){
                 redirect(site_url('login'));
             }
