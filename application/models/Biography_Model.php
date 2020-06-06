@@ -7,7 +7,7 @@
 
         public function init($id, $telp){
             $data = array(
-                'id' => $id,
+                'user_id' => $id,
                 'no_telp' => $telp
             );
             $this->db->insert($this->t_biographies, $data);

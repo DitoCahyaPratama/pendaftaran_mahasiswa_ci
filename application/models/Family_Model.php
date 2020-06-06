@@ -7,7 +7,7 @@
 
         public function init($id){
             $data = array(
-                'id' => $id
+                'user_id' => $id
             );
             $this->db->insert($this->t_families, $data);
         }

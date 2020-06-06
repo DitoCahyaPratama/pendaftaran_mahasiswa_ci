@@ -7,7 +7,7 @@
 
         public function init($id, $prodi){
             $data = array(
-                'id' => $id,
+                'user_id' => $id,
                 'prodi' => $prodi
             );
             $this->db->insert($this->t_forms, $data);

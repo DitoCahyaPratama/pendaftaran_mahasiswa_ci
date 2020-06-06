@@ -13,7 +13,7 @@
                     <div class="col-sm-6 col-md-3 login-box">
                         <a href="<?php echo site_url('/') ?>">Back to Home</a>
                         <h4 class="login-title">Daftar</h4>
-                        <form onsubmit="system_daftar()" id="form_daftar">
+                        <form onsubmit="system_daftar(); return false">
                             <div class="form-group">
                                 <label for="uname">Nama Lengkap</label>
                                 <input type="text" class="form-control" id="uname" required="">
@@ -78,9 +78,15 @@
                     prodi: prodi
                 },
                 type: 'POST',
-                dataType: 'JSON',
+                dataType : "JSON",
                 success: function(res) {
-                    if (res) {
+                    if (res.length == 1) {
+                        document.getElementById('gagal').innerHTML = res;
+                        $('#gagal').show();
+                    } else if(res.length == 2){
+                        document.getElementById('gagal').innerHTML = res[0]+"<br />"+res[1];
+                        $('#gagal').show();
+                    } else if(res == 'sukses'){
                         $('#sukses').show();
                         $('#gagal').hide();
                         Swal.fire({
@@ -91,15 +97,10 @@
                             confirmButtonText: 'Baik akan saya simpan!',
                             allowOutsideClick: false
                         }).then((result) => {
-                            if (result.value) {
-                                setInterval(function() {
-                                    document.location = '<?php echo base_url('') ?>';
-                                }, 1000);
-                            }
+                            setInterval(function(){ 
+                                document.location = '<?php echo base_url('/') ?>';   
+                            }, 200);
                         })
-                    } else {
-                        document.getElementById('gagal').innerHTML = res;
-                        $('#gagal').show();
                     }
                 },
                 error: function(err) {

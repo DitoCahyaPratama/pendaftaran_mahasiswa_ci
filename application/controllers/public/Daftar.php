@@ -36,13 +36,16 @@
             $telp     = $this->input->post('telp');
             $prodi    = $this->input->post('prodi');
             $data = $this->user_model->doDaftar($username, $password, $email, $telp);
-            if($data){
-                $id = $this->user_model->getId($email)->result();
+            if($data == 'sukses'){
+                $row_user = $this->user_model->get_id($email)->result();
+                foreach($row_user as $row){
+                    $id = $row->id;
+                }
                 $this->biography_model->init($id, $telp);
-                $this->form_model->init($id, $prodi);
-                $this->economy_model->init($id);
-                $this->family_model->init($id);
-                $this->education_model->init($id);
+                // $this->form_model->init($id, $prodi);
+                // $this->economy_model->init($id);
+                // $this->family_model->init($id);
+                // $this->education_model->init($id);
             }
 
             echo json_encode($data);

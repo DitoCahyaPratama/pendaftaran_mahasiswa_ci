@@ -42,10 +42,10 @@
 
     <?php $this->load->view('admin/_partials/script.php') ?>
     <script type="text/javascript">
-        $('#sukses').hide();
+            $('#sukses').hide();
             $('#gagal').hide();
+
             function system_login(){
-                var form = $('#form_login');
                 var email = $('#email').val();
                 var upass = $('#upass').val();
                 $.ajax({
